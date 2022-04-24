@@ -14,7 +14,7 @@ public class TripsDAO {
     private EntityManager em;
 
     public List<Trip> loadAll() {
-        return em.createNamedQuery("Trip.findAll", Trip.class).getResultList();
+        return em.createNamedQuery("Trip.findAllWithBusAndDriver", Trip.class).getResultList();
     }
 
     public void setEm(EntityManager em) {
@@ -27,7 +27,7 @@ public class TripsDAO {
 
     public Trip findOne(Integer id) { return em.find(Trip.class, id); }
 
-    public List<Trip> loadByDriverId(Integer driverId) {
+    public List<Trip> loadTripsByDriverId(Integer driverId) {
         return em.createNamedQuery("Trip.findByDriverId", Trip.class)
                 .setParameter("driverId", driverId)
                 .getResultList();

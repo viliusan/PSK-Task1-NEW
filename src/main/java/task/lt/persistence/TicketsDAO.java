@@ -13,7 +13,13 @@ public class TicketsDAO {
     private EntityManager em;
 
     public List<Ticket> loadAll() {
+        System.out.println("Loading only tickets: ");
         return em.createNamedQuery("Ticket.findAll", Ticket.class).getResultList();
+    }
+
+    public List<Ticket> loadAllWithTrip() {
+        System.out.println("Loading tickets with trips: ");
+        return em.createNamedQuery("Ticket.findAllWithTrips", Ticket.class).getResultList();
     }
 
     public void setEm(EntityManager em) {

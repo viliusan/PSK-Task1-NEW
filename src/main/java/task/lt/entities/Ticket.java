@@ -8,7 +8,9 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Ticket.findAll", query = "select tck from Ticket as tck")
+        @NamedQuery(name = "Ticket.findAll", query = "select tck from Ticket as tck"),
+        @NamedQuery(name = "Ticket.findAllWithTrips",
+                query = "select tck from Ticket tck left join fetch tck.trip")
 })
 @Table(name = "ticket", schema = "public")
 @Getter @Setter

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +12,10 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Trip.findAll", query = "select a from Trip as a"),
-        @NamedQuery(name = "Trip.findByDriverId", query = "select a from Trip as a where a.driver.driverId = :driverId")
+        @NamedQuery(name = "Trip.findAllWithBusAndDriver",
+                query = "select tr from Trip tr left join fetch tr.bus left join fetch tr.driver"),
+        @NamedQuery(name = "Trip.findByDriverId", query = "select tr from Trip as tr left join fetch tr.bus " +
+                "left join fetch tr.driver where tr.driver.driverId = :driverId")
 })
 @Table(name = "trip", schema = "public")
 @Getter @Setter
@@ -22,12 +25,12 @@ public class Trip {
     @Getter @Setter
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id")
     @Getter @Setter
     private Bus bus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "driver_id")
     @Getter @Setter
     private Driver driver;
@@ -37,18 +40,18 @@ public class Trip {
     List<Ticket> tickets;
 
     @Size(max = 100)
-    @NotNull
+    @NotBlank
     @Column(name = "name")
     @Getter @Setter
     private String name;
 
     @Column(name = "departure_time")
-    @NotNull
+    @NotBlank
     @Getter @Setter
     private String departureTime;
 
     @Column(name = "arrival_time")
-    @NotNull
+    @NotBlank
     @Getter @Setter
     private String arrivalTime;
 

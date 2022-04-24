@@ -25,12 +25,24 @@
                 #{bus.currentFuel}
             </h:column>
 
+            <!-- <h:column>
+                <f:facet name = "header">Drivers</f:facet>
+                #{buses.getAllDriversAsString(bus)}
+             </h:column> -->
+
             <h:column>
                 <f:facet name = "header">Delete bus</f:facet>
                 <h:commandButton value="Delete" action="#{buses.deleteBus(bus)}" />
             </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assing driver</f:facet>
+                <h:inputText binding="#{input}" />
+                <h:commandButton value="Assign" action="#{buses.assignDriverToBus(input.value, bus.busId)}" />
+            </h:column>
         </h:dataTable>
     </h:form>
+
     <h3>Add new bus: </h3>
     <h:form>
         <h:outputLabel>Plate number </h:outputLabel>

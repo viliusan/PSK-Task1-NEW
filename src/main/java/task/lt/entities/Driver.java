@@ -4,15 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Driver.findAll", query = "select a from Driver as a")
+        @NamedQuery(name = "Driver.findAll", query = "select a from Driver as a"),
 })
 @Table(name = "driver", schema = "public")
 @Getter @Setter
@@ -24,14 +25,14 @@ public class Driver implements Serializable {
     private Integer driverId;
 
     @Size(max = 50)
-    @NotNull
+    @NotBlank
     @Column(name = "name")
     @Getter @Setter
     private String name;
 
     @Size(max = 50)
     @Column(name = "surname")
-    @NotNull
+    @NotBlank
     @Getter @Setter
     private String surname;
 
@@ -42,10 +43,11 @@ public class Driver implements Serializable {
 
     @OneToMany(mappedBy = "driver")
     @Getter @Setter
-    List<Trip> trips;
+    private List<Trip> trips;
 
-    public Driver() {
-    }
+    @ManyToMany(mappedBy="drivers")
+    @Getter @Setter
+    private List<Bus> buses = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

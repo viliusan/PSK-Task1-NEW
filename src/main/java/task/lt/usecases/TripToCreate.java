@@ -7,16 +7,22 @@ import task.lt.persistence.TripsDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 
-@Model
+@ViewScoped
+@Named
 @Getter
 @Setter
 public class TripToCreate implements Serializable {
     @Inject
     private TripsDAO tripsDAO;
+
+    @Inject
+    private TripLogs tripLogs;
 
     @Getter @Setter
     private Trip trip;
@@ -26,8 +32,9 @@ public class TripToCreate implements Serializable {
         trip = new Trip();
     }
 
-    @Transactional
+    @Transactional(Transactional.TxType.REQUIRED)
     public String createTrip(){
+        this.tripLogs.addTripLog(trip);
         this.tripsDAO.persist(trip);
         return "trips?faces-redirect=true";
     }

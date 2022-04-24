@@ -12,18 +12,6 @@
 </h:head>
 
 <h:body>
-    <h3>Add new trip: </h3>
-    <h:form>
-        <h:outputLabel>Name </h:outputLabel>
-        <h:inputText value="#{tripToCreate.trip.name}" required="true" />
-        <h:outputText value="&lt;br/&gt;" escape="false" />
-        <h:outputLabel>Departure </h:outputLabel>
-        <h:inputText value="#{tripToCreate.trip.departureTime}" required="true" />
-        <h:outputText value="&lt;br/&gt;" escape="false" />
-        <h:outputLabel>Arrival </h:outputLabel>
-        <h:inputText value="#{tripToCreate.trip.arrivalTime}" required="true" />
-        <h:outputText value="&lt;br/&gt;" escape="false" />
-    </h:form>
     <h:form>
         <h3>Assign driver and bus:</h3>
         <h:dataTable value = "#{drivers.allDrivers}" var = "driver"
@@ -49,6 +37,7 @@
                 <f:facet name = "header">Assign</f:facet>
                 <h:commandButton value="Assign" action="#{tripToCreate.trip.setDriver(driver)}" />
             </h:column>
+
         </h:dataTable>
 
         <h:outputText value="&lt;br/&gt;" escape="false" />
@@ -72,6 +61,20 @@
                 <h:commandButton value="Assign" action="#{tripToCreate.trip.setBus(bus)}" />
             </h:column>
         </h:dataTable>
+    </h:form>
+
+    <h3>Fill trip details: </h3>
+    <h:form>
+        <h:outputLabel>Name </h:outputLabel>
+        <h:inputText value="#{tripToCreate.trip.name}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Departure </h:outputLabel>
+        <h:inputText value="#{tripToCreate.trip.departureTime}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Arrival </h:outputLabel>
+        <h:inputText value="#{tripToCreate.trip.arrivalTime}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:commandButton value="Submit" action="#{tripToCreate.createTrip}" />
     </h:form>

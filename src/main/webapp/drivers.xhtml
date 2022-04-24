@@ -44,11 +44,15 @@
             </h:column>
             <h:column>
                 <f:facet name = "header">See assigned trips</f:facet>
-                <h:commandButton value="See" action="#{trips.loadTripsByDriver(driver.driverId)}" />
+                <h:commandButton value="See" action="#{drivers.loadTripsByDriverId(driver.driverId)}" />
             </h:column>
         </h:dataTable>
-        <h3>Driver trips:</h3>
-        <h:dataTable value = "#{trips.driverTrips}" var = "trip"
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+
+    <h:form>
+        <h:dataTable value = "#{drivers.tripsById}" var = "trip"
                      styleClass = "mainTable"
                      headerClass = "tableHeader"
                      rowClasses = "tableOddRow,tableEvenRow">
@@ -58,22 +62,17 @@
             </h:column>
 
             <h:column>
-                <f:facet name = "header">Departure</f:facet>
-                #{trip.departureTime}
-            </h:column>
-
-            <h:column>
                 <f:facet name = "header">Arrival</f:facet>
                 #{trip.arrivalTime}
             </h:column>
 
             <h:column>
-                <f:facet name = "header">Bus Plate Number</f:facet>
-                #{trip.bus.plateNumber}
+                <f:facet name = "header">Departure</f:facet>
+                #{trip.departureTime}
             </h:column>
-
         </h:dataTable>
     </h:form>
+
     <h3>Add new driver: </h3>
     <h:form>
         <h:outputLabel>Name </h:outputLabel>

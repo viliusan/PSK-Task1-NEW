@@ -3,7 +3,9 @@ package task.lt.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import task.lt.entities.Driver;
+import task.lt.entities.Trip;
 import task.lt.persistence.DriversDAO;
+import task.lt.persistence.TripsDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -16,23 +18,28 @@ public class Drivers {
     @Inject
     private DriversDAO driversDAO;
 
+    @Inject
+    private TripsDAO tripsDAO;
+
     @Getter @Setter
     private Driver driverToCreate = new Driver();
 
     private List<Driver> allDrivers;
 
+    @Getter @Setter
+    private List<Trip> tripsById;
+
     @PostConstruct
     public void init(){
         loadDrivers();
-        /*Map<String, String> requestParameters =
-        FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        Integer driverId = Integer.parseInt(requestParameters.get("driverId"));
-        this.driverToUpdate = driversDAO.findOne(driverId);
-        System.out.println("driver ID" + driverId);*/
     }
 
     public void loadDrivers() {
         this.allDrivers = driversDAO.loadAll();
+    }
+
+    public void loadTripsByDriverId(Integer driverId) {
+        this.tripsById = tripsDAO.loadTripsByDriverId(driverId);
     }
 
     public List<Driver> getAllPlayers(){

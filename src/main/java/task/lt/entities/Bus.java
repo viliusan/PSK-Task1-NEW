@@ -4,15 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Bus.findAll", query = "select a from Bus as a")
+        @NamedQuery(name = "Bus.findAll", query = "select a from Bus as a"),
+        @NamedQuery(name = "Bus.findAllWithDrivers", query = "select distinct bus from Bus bus left join fetch bus.drivers"),
 })
 @Table(name = "bus", schema = "public")
 @Getter @Setter
@@ -24,7 +27,7 @@ public class Bus implements Serializable {
     private Integer busId;
 
     @Size(max = 6)
-    @NotNull
+    @NotBlank
     @Column(name = "plate_number", unique=true)
     @Getter @Setter
     private String plateNumber;
@@ -35,7 +38,18 @@ public class Bus implements Serializable {
 
     @OneToMany(mappedBy = "bus")
     @Getter @Setter
-    List<Trip> trips;
+    private List<Trip> trips;
+
+    @ManyToMany
+    @JoinTable(name= "driver_bus",
+            joinColumns = @JoinColumn(name = "bus_id"),
+            inverseJoinColumns = @JoinColumn(name = "driver_id"))
+    @Getter @Setter
+    private List<Driver> drivers = new ArrayList<>();
+
+    public void addDriver(Driver driver){
+        drivers.add(driver);
+    }
 
     @Override
     public boolean equals(Object o) {
