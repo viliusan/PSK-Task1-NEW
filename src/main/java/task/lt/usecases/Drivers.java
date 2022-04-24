@@ -24,6 +24,11 @@ public class Drivers {
     @PostConstruct
     public void init(){
         loadDrivers();
+        /*Map<String, String> requestParameters =
+        FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        Integer driverId = Integer.parseInt(requestParameters.get("driverId"));
+        this.driverToUpdate = driversDAO.findOne(driverId);
+        System.out.println("driver ID" + driverId);*/
     }
 
     public void loadDrivers() {
@@ -37,13 +42,12 @@ public class Drivers {
     @Transactional
     public String createDriver(){
         this.driversDAO.persist(driverToCreate);
-        return "success";
+        return "drivers?faces-redirect=true";
     }
 
-    /*public Driver getPlayerToCreate() {
-        return driverToCreate;
+    @Transactional
+    public String deleteDriver(Driver driver){
+        this.driversDAO.delete(driver);
+        return "drivers?faces-redirect=true";
     }
-    public void setPlayerToCreate(Driver driverToCreate) {
-        this.driverToCreate = driverToCreate;
-    }*/
 }

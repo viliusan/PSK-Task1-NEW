@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,35 +15,48 @@ import java.util.Objects;
         @NamedQuery(name = "Driver.findAll", query = "select a from Driver as a")
 })
 @Table(name = "driver", schema = "public")
+@Getter @Setter
 public class Driver implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "driver_id")
     @Getter @Setter
-    private Integer id;
+    private Integer driverId;
 
     @Size(max = 50)
+    @NotNull
     @Column(name = "name")
     @Getter @Setter
     private String name;
 
-    public Driver() {
-    }
+    @Size(max = 50)
+    @Column(name = "surname")
+    @NotNull
+    @Getter @Setter
+    private String surname;
 
-    public Driver(String name) {
-        this.name = name;
+    @Size(max = 20)
+    @Column(name = "cell_phone")
+    @Getter @Setter
+    private String cellPhone;
+
+    @OneToMany(mappedBy = "driver")
+    @Getter @Setter
+    List<Trip> trips;
+
+    public Driver() {
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Driver player = (Driver) o;
-        return Objects.equals(id, player.id) &&
-                Objects.equals(name, player.name);
+        Driver driver = (Driver) o;
+        return Objects.equals(name, driver.name) && Objects.equals(surname, driver.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name, surname);
     }
 }

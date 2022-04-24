@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Buses:</h2>
+    <h:form>
+        <h:dataTable value = "#{buses.allbuses}" var = "bus"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Plate Number</f:facet>
+                #{bus.plateNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Current fuel</f:facet>
+                #{bus.currentFuel}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Delete bus</f:facet>
+                <h:commandButton value="Delete" action="#{buses.deleteBus(bus)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h3>Add new bus: </h3>
+    <h:form>
+        <h:outputLabel>Plate number </h:outputLabel>
+        <h:inputText value="#{buses.busToCreate.plateNumber}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Current fuel </h:outputLabel>
+        <h:inputText value="#{buses.busToCreate.currentFuel}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Add" action="#{buses.createBus}" />
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="index" value="Main page"/>
+</h:body>
+</html>

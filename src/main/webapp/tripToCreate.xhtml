@@ -1,0 +1,82 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h3>Add new trip: </h3>
+    <h:form>
+        <h:outputLabel>Name </h:outputLabel>
+        <h:inputText value="#{tripToCreate.trip.name}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Departure </h:outputLabel>
+        <h:inputText value="#{tripToCreate.trip.departureTime}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Arrival </h:outputLabel>
+        <h:inputText value="#{tripToCreate.trip.arrivalTime}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+    </h:form>
+    <h:form>
+        <h3>Assign driver and bus:</h3>
+        <h:dataTable value = "#{drivers.allDrivers}" var = "driver"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{driver.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Surname</f:facet>
+                #{driver.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Cell phone</f:facet>
+                #{driver.cellPhone}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assign</f:facet>
+                <h:commandButton value="Assign" action="#{tripToCreate.trip.setDriver(driver)}" />
+            </h:column>
+        </h:dataTable>
+
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+
+        <h:dataTable value = "#{buses.allbuses}" var = "bus"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Plate Number</f:facet>
+                #{bus.plateNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Current fuel</f:facet>
+                #{bus.currentFuel}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assign bus</f:facet>
+                <h:commandButton value="Assign" action="#{tripToCreate.trip.setBus(bus)}" />
+            </h:column>
+        </h:dataTable>
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Submit" action="#{tripToCreate.createTrip}" />
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="index" value="Main page"/>
+</h:body>
+</html>
