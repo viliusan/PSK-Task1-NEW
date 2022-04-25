@@ -13,7 +13,7 @@
     <environments default="development">
         <environment id="development">
             <transactionManager type="MANAGED"/>
-            <dataSource type="UNPOOLED">
+            <dataSource type="JNDI">
                 <property name="data_source" value="DriversDataSource"/>
             </dataSource>
         </environment>
@@ -23,7 +23,6 @@
         <mapper resource="mybatis/xml/TripMapper.xml"/>
         <mapper resource="mybatis/xml/BusMapper.xml"/>
         <mapper resource="mybatis/xml/TicketMapper.xml"/>
-        <mapper resource="mybatis/xml/DriverBusMapper.xml"/>
         <mapper resource="mybatis/xml/TripLogMapper.xml"/>
     </mappers>
 </configuration>

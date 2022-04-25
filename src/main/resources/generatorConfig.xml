@@ -19,7 +19,18 @@
 
         <table schema="public" tableName="driver">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
-            <ignoreColumn column="opt_lock_version" />
+        </table>
+        <table schema="public" tableName="bus">
+            <generatedKey column="bus_id" identity="true" sqlStatement="JDBC" />
+        </table>
+        <table schema="public" tableName="trip">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+        </table>
+        <table schema="public" tableName="ticket">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+        </table>
+        <table schema="public" tableName="trip_log">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
     </context>
 </generatorConfiguration>
