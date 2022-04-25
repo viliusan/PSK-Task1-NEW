@@ -34,9 +34,7 @@
         </h:commandButton>
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:outputText value="&lt;br/&gt;" escape="false" />
-        <h:commandButton value="Refresh page" disabled="#{!generateCardNumber.cardNumberGenerationRunning}" outcome="driverToUpdate?driverId=#{driver.driverId}">
-            <f:param name="driverId" value="#{driverToUpdate.driver.driverId}" />
-        </h:commandButton>
+        <h:commandButton value="Refresh page" disabled="#{!generateCardNumber.cardNumberGenerationRunning}" outcome="driverToUpdate?faces-redirect=true"/>
     </h:form>
 </h:body>
 </html>

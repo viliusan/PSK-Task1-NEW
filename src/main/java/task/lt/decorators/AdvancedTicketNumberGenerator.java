@@ -18,7 +18,7 @@ public abstract class AdvancedTicketNumberGenerator implements TicketNumber {
         Integer number = ticketNumber.generateTicketNumber(bound);
         System.out.println("Generated number before decoration: " + number);
         if (number < 100){
-            number = number * 2;
+            number = ticketNumber.generateTicketNumber((bound*2));
         }
         return number;
     }
