@@ -39,6 +39,9 @@ public class Driver implements Serializable {
     @Column(name = "cell_phone")
     private String cellPhone;
 
+    @Column(name = "card_number")
+    private Integer cardNumber;
+
     @OneToMany(mappedBy = "driver")
     private List<Trip> trips;
 

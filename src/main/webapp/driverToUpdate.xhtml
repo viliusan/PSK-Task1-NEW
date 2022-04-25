@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -21,6 +23,13 @@
         <h:inputText value="#{driverToUpdate.driver.cellPhone}" required="true" />
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:commandButton value="Update" action="#{driverToUpdate.updateDriver}" />
+    </h:form>
+    <h:form>
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputText value="#{generateCardNumber.cardNumberGenerationStatus}" />
+        <h:commandButton value="Generate card number?" disabled="#{generateCardNumber.cardNumberGenerationRunning}" action="#{generateCardNumber.generateDriverCardNumber()}">
+            <f:param name="driverId" value="#{driverToUpdate.driver.driverId}" />
+        </h:commandButton>
     </h:form>
 </h:body>
 </html>
