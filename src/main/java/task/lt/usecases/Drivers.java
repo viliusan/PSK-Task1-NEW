@@ -24,6 +24,7 @@ public class Drivers {
     @Getter @Setter
     private Driver driverToCreate = new Driver();
 
+    @Getter @Setter
     private List<Driver> allDrivers;
 
     @Getter @Setter
@@ -40,10 +41,6 @@ public class Drivers {
 
     public void loadTripsByDriverId(Integer driverId) {
         this.tripsById = tripsDAO.loadTripsByDriverId(driverId);
-    }
-
-    public List<Driver> getAllPlayers(){
-        return allDrivers;
     }
 
     @Transactional
