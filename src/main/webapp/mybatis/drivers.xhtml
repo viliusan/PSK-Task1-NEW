@@ -16,6 +16,10 @@
                      headerClass = "tableHeader"
                      rowClasses = "tableOddRow,tableEvenRow">
             <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{driver.driverId}
+            </h:column>
+            <h:column>
                 <f:facet name = "header">Name</f:facet>
                 #{driver.name}
             </h:column>
@@ -34,15 +38,21 @@
                 <f:facet name = "header">Delete driver</f:facet>
                 <h:commandButton value="Delete" action="#{driversMyBatis.deleteDriver(driver.driverId)}" />
             </h:column>
-            <!-- <h:column>
-                <f:facet name = "header">Update driver</f:facet>
-                <h:link value="Update" outcome="driverToUpdate?driverId=#{driver.driverId}" />
-            </h:column>
-            <h:column>
-                <f:facet name = "header">See assigned trips</f:facet>
-                <h:commandButton value="See" action="#{drivers.loadTripsByDriverId(driver.driverId)}" />
-            </h:column> -->
         </h:dataTable>
+    </h:form>
+
+    <h3>Add new driver: </h3>
+    <h:form>
+        <h:outputLabel>Name </h:outputLabel>
+        <h:inputText value="#{driversMyBatis.driverToCreate.name}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Surname </h:outputLabel>
+        <h:inputText value="#{driversMyBatis.driverToCreate.surname}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Cell phone </h:outputLabel>
+        <h:inputText value="#{driversMyBatis.driverToCreate.cellPhone}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Add" action="#{driversMyBatis.createDriver}" />
     </h:form>
 
     <h:outputText value="&lt;br/&gt;" escape="false" />

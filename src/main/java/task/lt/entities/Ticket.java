@@ -17,24 +17,19 @@ import java.util.Objects;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
-    @Getter @Setter
     private Trip trip;
 
     @Column(name = "seat")
-    @Getter @Setter
     private Integer seat;
 
     @Column(name = "price")
-    @Getter @Setter
     private Double price;
 
     @Column(name = "is_bought")
-    @Getter @Setter
     private boolean isBought;
 
     @Override

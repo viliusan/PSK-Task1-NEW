@@ -24,6 +24,10 @@ public class DriversMyBatis {
     @Setter
     private List<Driver> allDrivers;
 
+    @Getter
+    @Setter
+    private Driver driverToCreate = new Driver();
+
     public void loadDrivers() {
         this.allDrivers = driverMapper.selectAllWithTrips();
     }
@@ -37,6 +41,12 @@ public class DriversMyBatis {
     public String deleteDriver(Integer driverId) {
         driverBusMapper.deleteByDriverId(driverId);
         driverMapper.deleteByPrimaryKey(driverId);
+        return "/mybatis/drivers?faces-redirect=true";
+    }
+
+    @Transactional
+    public String createDriver() {
+        driverMapper.insert(driverToCreate);
         return "/mybatis/drivers?faces-redirect=true";
     }
 }

@@ -23,7 +23,7 @@ public class Trips {
     @Getter @Setter
     private Driver driver;
 
-    @Getter
+    @Getter @Setter
     private List<Trip> allTripsWithDriverBus;
 
     public void loadTrips() {

@@ -23,28 +23,23 @@ public class Bus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bus_id")
-    @Getter @Setter
     private Integer busId;
 
     @Size(max = 6)
     @NotBlank
     @Column(name = "plate_number", unique=true)
-    @Getter @Setter
     private String plateNumber;
 
     @Column(name = "current_fuel")
-    @Getter @Setter
     private Integer currentFuel;
 
     @OneToMany(mappedBy = "bus")
-    @Getter @Setter
     private List<Trip> trips;
 
     @ManyToMany
     @JoinTable(name= "driver_bus",
             joinColumns = @JoinColumn(name = "bus_id"),
             inverseJoinColumns = @JoinColumn(name = "driver_id"))
-    @Getter @Setter
     private List<Driver> drivers = new ArrayList<>();
 
     public void addDriver(Driver driver){

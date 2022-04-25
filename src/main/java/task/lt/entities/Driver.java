@@ -21,32 +21,26 @@ public class Driver implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "driver_id")
-    @Getter @Setter
     private Integer driverId;
 
     @Size(max = 50)
     @NotBlank
     @Column(name = "name")
-    @Getter @Setter
     private String name;
 
     @Size(max = 50)
     @Column(name = "surname")
     @NotBlank
-    @Getter @Setter
     private String surname;
 
     @Size(max = 20)
     @Column(name = "cell_phone")
-    @Getter @Setter
     private String cellPhone;
 
     @OneToMany(mappedBy = "driver")
-    @Getter @Setter
     private List<Trip> trips;
 
     @ManyToMany(mappedBy="drivers")
-    @Getter @Setter
     private List<Bus> buses = new ArrayList<>();
 
     @Override

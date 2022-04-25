@@ -22,37 +22,30 @@ import java.util.Objects;
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id")
-    @Getter @Setter
     private Bus bus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "driver_id")
-    @Getter @Setter
     private Driver driver;
 
     @OneToMany(mappedBy = "trip")
-    @Getter @Setter
     List<Ticket> tickets;
 
     @Size(max = 100)
     @NotBlank
     @Column(name = "name")
-    @Getter @Setter
     private String name;
 
     @Column(name = "departure_time")
     @NotBlank
-    @Getter @Setter
     private String departureTime;
 
     @Column(name = "arrival_time")
     @NotBlank
-    @Getter @Setter
     private String arrivalTime;
 
     public Trip() {

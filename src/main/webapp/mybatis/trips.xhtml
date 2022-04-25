@@ -37,19 +37,6 @@
                 <f:facet name = "header">See tickets</f:facet>
                 <h:commandButton value="See" action="#{tripsMyBatis.loadTicketsByTripId(trip.id)}" />
             </h:column>
-
-            <!-- <h:column>
-                 <f:facet name = "header">Driver name</f:facet>
-                 #{trip.driver.name}
-             </h:column>
-             <h:column>
-                 <f:facet name = "header">Driver surname</f:facet>
-                 #{trip.driver.surname}
-             </h:column>
-             <h:column>
-                 <f:facet name = "header">Bus number</f:facet>
-                 #{trip.bus.plateNumber}
-             </h:column> -->
         </h:dataTable>
     </h:form>
     <h:outputText value="&lt;br/&gt;" escape="false" />
@@ -71,6 +58,11 @@
             <h:column>
                 <f:facet name = "header">Price</f:facet>
                 #{ticket.price}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Is bought</f:facet>
+                #{ticket.isBought}
             </h:column>
         </h:dataTable>
     </h:form>
