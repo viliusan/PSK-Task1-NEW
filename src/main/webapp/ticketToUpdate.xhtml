@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f = "http://java.sun.com/jsf/core">
+      xmlns:f = "http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
@@ -10,7 +11,7 @@
 <h:body>
     <h2>Update ticket:</h2>
 
-    <h:form>
+    <h:form id="updateForm">
         <h:outputLabel>Trip Name: #{ticketToUpdate.ticket.trip.name}</h:outputLabel>
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:outputLabel>Price</h:outputLabel>
@@ -25,7 +26,15 @@
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:commandButton value="Update" action="#{ticketToUpdate.updateTicket}" />
         <h:outputText value="&lt;br/&gt;" escape="false" />
-        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form>
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="ticket" value="Tickets page"/>
+
+    <p:confirmDialog id="myDialogID" widgetVar="confirmDialog" global="true" showEffect="fade"
+                     message="Value was already modified by other user. Do you want to commit your changes?"
+                     hideEffect="fade" responsive="true" width="350">
+        <p:commandButton value="No"  onclick="PF('confirmDialog').hide();" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+        <p:commandButton value="Yes" onclick="PF('confirmDialog').hide();" action="#{ticketToUpdate.updateTicketAfterLock}"  type="submit" styleClass="ui-confirmdialog-yes" />
+    </p:confirmDialog>
 </h:body>
 </html>

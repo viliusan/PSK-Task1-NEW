@@ -2,6 +2,7 @@ package task.lt.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.context.RequestContext;
 import task.lt.entities.Ticket;
 import task.lt.persistence.TicketsDAO;
 
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -33,13 +35,41 @@ public class TicketToUpdate implements Serializable {
         this.ticket = ticketsDAO.findOne(ticketId);
     }
 
-    @Transactional
-    public String updateTicket() {
+    /*@Transactional
+    public void updateTicketWithoutAsking() {
         try {
             ticketsDAO.update(this.ticket);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("ticket.xhtml?faces-redirect=true" + "&info=success");
         } catch (OptimisticLockException e) {
-            return "ticketToUpdate?faces-redirect=true&ticketId=" + this.ticket.getId() + "&error=optimistic-lock-exception";
+            updateTicketAfterLock();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return "ticket?faces-redirect=true";
+    }*/
+
+    @Transactional
+    public void updateTicket() {
+        try {
+            ticketsDAO.update(this.ticket);
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("ticket.xhtml?faces-redirect=true&info=success");
+        } catch (OptimisticLockException e) {
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('confirmDialog').show();");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    public String updateTicketAfterLock() {
+        Ticket ticket = ticketsDAO.findOne(this.ticket.getId());
+        ticket.setIsBought(this.ticket.getIsBought());
+        ticket.setPrice(this.ticket.getPrice());
+        ticket.setSeat(this.ticket.getSeat());
+        ticketsDAO.update(ticket);
+
+        return "ticket?faces-redirect=true" + "&info=success";
     }
 }

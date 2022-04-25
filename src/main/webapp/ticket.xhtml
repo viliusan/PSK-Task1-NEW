@@ -45,6 +45,8 @@
                 <h:link value="Update" outcome="ticketToUpdate?ticketId=#{ticket.id}" />
             </h:column>
         </h:dataTable>
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputText value="Update successful" rendered="#{param['info'] == 'success'}" />
     </h:form>
 
     <h2>Add ticket:</h2>
