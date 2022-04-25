@@ -26,7 +26,7 @@ public class DriversDAO {
     }
 
     public void delete(Driver driver){
-        this.em.remove(driver);
+        this.em.remove(em.contains(driver) ? driver : em.merge(driver));
     }
 
     public void update(Driver driver) {

@@ -33,6 +33,6 @@ public class BusesDAO {
     }
 
     public void delete(Bus bus){
-        this.em.remove(bus);
+        this.em.remove(em.contains(bus) ? bus : em.merge(bus));
     }
 }

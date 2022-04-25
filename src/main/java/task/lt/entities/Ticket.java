@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,7 @@ public class Ticket {
     private Trip trip;
 
     @Column(name = "seat")
+    @NotBlank
     private Integer seat;
 
     @Column(name = "price")

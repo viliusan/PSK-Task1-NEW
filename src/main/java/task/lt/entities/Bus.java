@@ -5,17 +5,16 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Bus.findAll", query = "select a from Bus as a"),
-        @NamedQuery(name = "Bus.findAllWithDrivers", query = "select distinct bus from Bus bus left join fetch bus.drivers"),
+        @NamedQuery(name = "Bus.findAllWithDrivers", query = "select distinct bus from Bus bus left join fetch bus.drivers")
 })
 @Table(name = "bus", schema = "public")
 @Getter @Setter
@@ -44,6 +43,10 @@ public class Bus implements Serializable {
 
     public void addDriver(Driver driver){
         drivers.add(driver);
+    }
+
+    public void removeDrive(Driver driver){
+        drivers.remove(driver);
     }
 
     @Override

@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Setter @Getter
@@ -29,10 +30,12 @@ public class TripLog {
     @Column(name = "driver_id")
     private Integer driverId;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date")
-
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+
+    public TripLog () {
+    }
 
     public TripLog (Trip trip) {
         this.name = trip.getName();
@@ -40,8 +43,19 @@ public class TripLog {
         this.departureTime = trip.getDepartureTime();
         this.driverId = trip.getDriver().getDriverId();
         this.busId = trip.getBus().getBusId();
+        this.creationDate = new Date();
     }
 
-    public TripLog () {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TripLog tripLog = (TripLog) o;
+        return Objects.equals(id, tripLog.id) && Objects.equals(name, tripLog.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
