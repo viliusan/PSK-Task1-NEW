@@ -10,15 +10,15 @@
 
 <h:body>
     <h2>Drivers:</h2>
-    <!--<h:form>
-       <h:inputText value="#{drivers.driverToCreate.name}" required="true" />
-       <h:commandButton value="Add new player" action="#{drivers}" />
-   </h:form>-->
     <h:form>
         <h:dataTable value = "#{drivers.allDrivers}" var = "driver"
                      styleClass = "mainTable"
                      headerClass = "tableHeader"
                      rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{driver.driverId}
+            </h:column>
             <h:column>
                 <f:facet name = "header">Name</f:facet>
                 #{driver.name}
@@ -32,6 +32,11 @@
             <h:column>
                 <f:facet name = "header">Cell phone</f:facet>
                 #{driver.cellPhone}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Card number</f:facet>
+                #{driver.cardNumber}
             </h:column>
 
             <h:column>
@@ -52,6 +57,7 @@
     <h:outputText value="&lt;br/&gt;" escape="false" />
 
     <h:form>
+        <h2>See assigned trips:</h2>
         <h:dataTable value = "#{drivers.tripsById}" var = "trip"
                      styleClass = "mainTable"
                      headerClass = "tableHeader"

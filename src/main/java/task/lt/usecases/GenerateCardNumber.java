@@ -36,7 +36,7 @@ public class GenerateCardNumber implements Serializable {
         if (driverCardNumberGenerationTask == null) {
             return null;
         } else if (isCardNumberGenerationRunning()) {
-            return "Card number generation in progress";
+            return "Card number generation in progress. Refresh to see if number exists ";
         }
         return "Suggested card number: " + driverCardNumberGenerationTask.get() + " ";
     }
