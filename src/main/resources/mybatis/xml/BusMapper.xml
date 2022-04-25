@@ -10,6 +10,23 @@
     <id column="BUS_ID" jdbcType="INTEGER" property="busId" />
     <result column="CURRENT_FUEL" jdbcType="INTEGER" property="currentFuel" />
     <result column="PLATE_NUMBER" jdbcType="VARCHAR" property="plateNumber" />
+
+    <collection property="trips" ofType="task.lt.mybatis.model.Trip">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="arrival_time" jdbcType="VARCHAR" property="arrivalTime" />
+      <result column="departure_time" jdbcType="VARCHAR" property="departureTime" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="bus_id" jdbcType="INTEGER" property="busId" />
+      <result column="driver_id" jdbcType="INTEGER" property="driverId" />
+    </collection>
+
+    <!-- <collection property="trips" javaType="ArrayList"
+                ofType="task.lt.mybatis.model.Trip" column="bus_id"
+                select="selectTripsForBus"/> -->
+
+    <collection property="drivers" javaType="ArrayList"
+                ofType="task.lt.mybatis.model.Driver" column="bus_id"
+                select="selectDriversForBus"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -58,5 +75,25 @@
     -->
     select BUS_ID, CURRENT_FUEL, PLATE_NUMBER
     from PUBLIC.BUS
+  </select>
+
+  <select id="selectAllWithTrips" resultMap="BaseResultMap">
+    select *
+    from bus bus
+           left join trip tip ON bus.bus_id = tip.bus_id
+  </select>
+
+  <select id="selectDriversForBus" resultType="task.lt.mybatis.model.Driver">
+    SELECT div.driver_id driverId, div.name, div.surname, div.cell_phone cellPhone
+    FROM driver div
+           LEFT JOIN driver_bus db ON div.driver_id = db.driver_id
+    WHERE db.bus_id = #{bus_id,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectTripsForBus" resultType="task.lt.mybatis.model.Trip">
+    select *
+    from trip tip
+    where tip.bus_id = #{bus_id,jdbcType=INTEGER}
   </select>
 </mapper>

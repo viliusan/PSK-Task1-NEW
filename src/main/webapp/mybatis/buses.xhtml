@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Buses:</h2>
+    <h:form>
+        <h:dataTable value = "#{busesMyBatis.allBuses}" var = "bus"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Plate Number</f:facet>
+                #{bus.plateNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Current fuel</f:facet>
+                #{bus.currentFuel}
+            </h:column>
+
+            <!-- <h:column>
+                 <f:facet name = "header">Drivers</f:facet>
+                 #{buses.getAllDriversAsString(bus)}
+             </h:column> -->
+
+            <h:column>
+                <f:facet name = "header">Delete bus</f:facet>
+                <h:commandButton value="Delete" action="#{busesMyBatis.deleteBus(bus.busId)}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assing driver</f:facet>
+                <h:inputText binding="#{input}" />
+                <h:commandButton value="Assign" action="#{busesMyBatis.assignDriverToBus(bus.busId, input.value)}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">See assigned drivers</f:facet>
+                <h:commandButton value="See" action="#{busesMyBatis.loadDriversById(bus.busId)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:form>
+        <h2>Assigned drivers for bus:</h2>
+        <h:dataTable value = "#{busesMyBatis.currentBusDrivers}" var = "driver"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{driver.driverId}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{driver.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Surname</f:facet>
+                #{driver.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">CellPhone</f:facet>
+                #{driver.cellPhone}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="/index" value="Main page"/>
+</h:body>
+</html>

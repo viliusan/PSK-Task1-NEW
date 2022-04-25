@@ -60,6 +60,10 @@
                      headerClass = "tableHeader"
                      rowClasses = "tableOddRow,tableEvenRow">
             <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{ticket.id}
+            </h:column>
+            <h:column>
                 <f:facet name = "header">Seat</f:facet>
                 #{ticket.seat}
             </h:column>

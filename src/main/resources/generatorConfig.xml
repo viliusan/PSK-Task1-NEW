@@ -32,5 +32,6 @@
         <table schema="public" tableName="trip_log">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
+        <table schema="public" tableName="driver_bus"/>
     </context>
 </generatorConfiguration>

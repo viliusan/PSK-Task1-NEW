@@ -34,11 +34,14 @@ public class TripsMyBatis implements Serializable {
     private List<Ticket> ticketsByTripId;
 
     public void loadTrips() {
+        //to select without tickets
         this.allTrips = tripMapper.selectAll();
+        //to select with tickets
+        //this.allTrips = tripMapper.selectTripsWithTickets();
     }
 
     public void loadTicketsByTripId(Integer tripId) {
-        //possible to get it from allTrips
+        //possible to get it from allTrips if fetched with tickets
         this.ticketsByTripId = tripMapper.selectTicketsByTripId(tripId);
     }
 

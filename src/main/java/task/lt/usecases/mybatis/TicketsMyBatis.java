@@ -19,8 +19,13 @@ public class TicketsMyBatis {
     private List<Ticket> allTickets;
 
     public void loadTrips() {
-        this.allTickets = ticketMapper.selectAll();
+        this.allTickets = ticketMapper.selectAllWithTrip();
     }
+
+    /*public String getTripNameWithId(Integer tripId){
+        //better way to get all to list and then iterate.
+        return ticketMapper.selectTripNameById(tripId).getName();
+    }*/
 
     @PostConstruct
     public void init() {
