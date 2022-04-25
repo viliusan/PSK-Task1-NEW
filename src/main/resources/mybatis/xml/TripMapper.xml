@@ -17,6 +17,19 @@
     <!--<collection property="tickets" javaType="ArrayList"
                 ofType="task.lt.mybatis.model.Ticket" column="id"
                 select="selectTicketsForTrip"/>-->
+    <association property="assignedDriver" javaType="task.lt.mybatis.model.Driver">
+      <id column="driver_id" jdbcType="INTEGER" property="driverId" />
+      <result column="cell_phone" jdbcType="VARCHAR" property="cellPhone" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="surname" jdbcType="VARCHAR" property="surname" />
+    </association>
+
+    <association property="assignedBus" javaType="task.lt.mybatis.model.Bus">
+      <id column="bus_id" jdbcType="INTEGER" property="busId" />
+      <result column="current_fuel" jdbcType="INTEGER" property="currentFuel" />
+      <result column="plate_number" jdbcType="VARCHAR" property="plateNumber" />
+    </association>
+
     <collection property="tickets" ofType="task.lt.mybatis.model.Ticket">
       <id column="id" jdbcType="INTEGER" property="id" />
       <result column="is_bought" jdbcType="BIT" property="isBought" />
@@ -87,7 +100,7 @@
   </select>
 
   <select id="selectTicketsByTripId" parameterType="map" resultType="task.lt.mybatis.model.Ticket">
-    SELECT tic.*
+    SELECT tic.id, tic.seat, tic.price, tic.is_bought isBought
     FROM public.ticket tic
     WHERE tic.trip_id = #{tripId,jdbcType=INTEGER}
   </select>
