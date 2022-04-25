@@ -37,6 +37,10 @@ public class Ticket {
     @Column(name = "ticket_number")
     private Integer ticketNumber;
 
+    @Version
+    @Column(name = "opt_lock_version")
+    private Integer version;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

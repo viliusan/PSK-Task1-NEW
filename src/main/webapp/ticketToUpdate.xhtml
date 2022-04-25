@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <h2>Update ticket:</h2>
+
+    <h:form>
+        <h:outputLabel>Trip Name: #{ticketToUpdate.ticket.trip.name}</h:outputLabel>
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Price</h:outputLabel>
+        <h:inputText value="#{ticketToUpdate.ticket.price}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Is bought </h:outputLabel>
+        <h:inputText value="#{ticketToUpdate.ticket.isBought}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Seat </h:outputLabel>
+        <h:inputText value="#{ticketToUpdate.ticket.seat}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Update" action="#{ticketToUpdate.updateTicket}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form>
+</h:body>
+</html>
