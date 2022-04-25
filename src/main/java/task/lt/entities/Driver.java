@@ -15,7 +15,9 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "Driver.findAll", query = "select a from Driver as a"),
 })
-@Table(name = "driver", schema = "public")
+@Table(name = "driver", schema = "public",
+        uniqueConstraints={@UniqueConstraint(columnNames = {"name", "surname", "cell_phone"})}
+)
 @Getter @Setter
 public class Driver implements Serializable {
     @Id

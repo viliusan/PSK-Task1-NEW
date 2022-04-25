@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import task.lt.entities.Driver;
 import task.lt.entities.Trip;
+import task.lt.interceptors.LoggedInvocation;
 import task.lt.persistence.DriversDAO;
 import task.lt.persistence.TripsDAO;
 
@@ -44,12 +45,14 @@ public class Drivers {
     }
 
     @Transactional
+    @LoggedInvocation
     public String createDriver(){
         this.driversDAO.persist(driverToCreate);
         return "drivers?faces-redirect=true";
     }
 
     @Transactional
+    @LoggedInvocation
     public String deleteDriver(Driver driver){
         this.driversDAO.delete(driver);
         return "drivers?faces-redirect=true";

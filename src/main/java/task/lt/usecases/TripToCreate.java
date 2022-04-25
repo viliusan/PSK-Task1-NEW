@@ -3,10 +3,10 @@ package task.lt.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import task.lt.entities.Trip;
+import task.lt.interceptors.LoggedInvocation;
 import task.lt.persistence.TripsDAO;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,6 +33,7 @@ public class TripToCreate implements Serializable {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
+    @LoggedInvocation
     public String createTrip(){
         this.tripLogs.addTripLog(trip);
         this.tripsDAO.persist(trip);

@@ -4,4 +4,13 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
        bean-discovery-mode="all">
+    <interceptors>
+        <class>task.lt.interceptors.MethodLogger</class>
+    </interceptors>
+    <decorators>
+        <class>task.lt.decorators.AdvancedTicketNumberGenerator</class>
+    </decorators>
+    <alternatives>
+        <class>task.lt.services.PlateNumberCheckerCheckerEU</class>
+    </alternatives>
 </beans>

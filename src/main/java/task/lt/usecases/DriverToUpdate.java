@@ -3,6 +3,7 @@ package task.lt.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import task.lt.entities.Driver;
+import task.lt.interceptors.LoggedInvocation;
 import task.lt.persistence.DriversDAO;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +34,7 @@ public class DriverToUpdate implements Serializable {
         this.driver = driversDAO.findOne(driverId);
     }
 
+    @LoggedInvocation
     @Transactional
     public String updateDriver(){
         this.driversDAO.update(driver);

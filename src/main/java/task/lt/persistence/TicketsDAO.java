@@ -13,12 +13,10 @@ public class TicketsDAO {
     private EntityManager em;
 
     public List<Ticket> loadAll() {
-        System.out.println("Loading only tickets: ");
         return em.createNamedQuery("Ticket.findAll", Ticket.class).getResultList();
     }
 
     public List<Ticket> loadAllWithTrip() {
-        System.out.println("Loading tickets with trips: ");
         return em.createNamedQuery("Ticket.findAllWithTrips", Ticket.class).getResultList();
     }
 
@@ -28,5 +26,13 @@ public class TicketsDAO {
 
     public void persist(Ticket ticket){
         this.em.persist(ticket);
+    }
+
+    public void update(Ticket ticket){
+        this.em.merge(ticket);
+    }
+
+    public Ticket findOne(Integer ticketId){
+        return this.em.find(Ticket.class, ticketId);
     }
 }

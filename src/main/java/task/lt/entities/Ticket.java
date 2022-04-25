@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -25,14 +25,17 @@ public class Ticket {
     private Trip trip;
 
     @Column(name = "seat")
-    @NotBlank
+    @NotNull
     private Integer seat;
 
     @Column(name = "price")
     private Double price;
 
     @Column(name = "is_bought")
-    private boolean isBought;
+    private Boolean isBought;
+
+    @Column(name = "ticket_number")
+    private Integer ticketNumber;
 
     @Override
     public boolean equals(Object o) {

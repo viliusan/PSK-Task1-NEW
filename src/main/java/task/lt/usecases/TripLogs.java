@@ -2,6 +2,7 @@ package task.lt.usecases;
 
 import task.lt.entities.Trip;
 import task.lt.entities.TripLog;
+import task.lt.interceptors.LoggedInvocation;
 import task.lt.persistence.TripLogDAO;
 
 import javax.enterprise.inject.Model;
@@ -13,6 +14,7 @@ public class TripLogs {
     @Inject
     private TripLogDAO tripLogDAO;
 
+    @LoggedInvocation
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void addTripLog(Trip trip) {
         TripLog tripLog = new TripLog(trip);
