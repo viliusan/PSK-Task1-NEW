@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Pilots:</h2>
+    <h:form>
+        <h:dataTable value = "#{pilots.allPilots}" var = "pilot"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{pilot.pilotId}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{pilot.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Surname</f:facet>
+                #{pilot.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Cell phone</f:facet>
+                #{pilot.cellPhone}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Card number</f:facet>
+                #{pilot.cardNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Update pilot</f:facet>
+                <h:link value="Update" outcome="pilotToUpdate?pilotId=#{pilot.pilotId}" />
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Delete pilot</f:facet>
+                <h:commandButton value="Delete" action="#{pilots.deletePilot(pilot)}" />
+            </h:column>
+            <h:column>
+                <f:facet name = "header">See assigned flights</f:facet>
+                <h:commandButton value="See" action="#{pilots.loadFlightsByPilotId(pilot.pilotId)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+
+    <h:form>
+        <h2>See assigned flights:</h2>
+        <h:dataTable value = "#{pilots.flightsById}" var = "flight"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{flight.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Arrival</f:facet>
+                #{flight.arrivalTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Departure</f:facet>
+                #{flight.departureTime}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h3>Add new pilot: </h3>
+    <h:form>
+        <h:outputLabel>Name </h:outputLabel>
+        <h:inputText value="#{pilots.pilotToCreate.name}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Surname </h:outputLabel>
+        <h:inputText value="#{pilots.pilotToCreate.surname}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Cell phone </h:outputLabel>
+        <h:inputText value="#{pilots.pilotToCreate.cellPhone}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Add" action="#{pilots.createPilot}" />
+    </h:form>
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="index" value="Main page"/>
+</h:body>
+</html>

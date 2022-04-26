@@ -33,7 +33,7 @@ public class TicketController {
         TicketDto ticketToRet = new TicketDto();
         ticketToRet.setPrice(ticket.getPrice());
         ticketToRet.setSeat(ticket.getSeat());
-        ticketToRet.setTripName(ticket.getTrip().getName());
+        ticketToRet.setFlightName(ticket.getFlight().getName());
 
         return Response.ok(ticketToRet).build();
     }

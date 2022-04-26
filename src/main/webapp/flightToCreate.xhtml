@@ -1,0 +1,85 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <h3>Assign pilot and plane:</h3>
+        <h:dataTable value = "#{pilots.allPilots}" var = "pilot"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{pilot.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Surname</f:facet>
+                #{pilot.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Cell phone</f:facet>
+                #{pilot.cellPhone}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assign</f:facet>
+                <h:commandButton value="Assign" action="#{flightToCreate.flight.setPilot(pilot)}" />
+            </h:column>
+
+        </h:dataTable>
+
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+
+        <h:dataTable value = "#{planes.allPlanes}" var = "plane"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Plane Number</f:facet>
+                #{plane.planeNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Current fuel</f:facet>
+                #{plane.currentFuel}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assign plane</f:facet>
+                <h:commandButton value="Assign" action="#{flightToCreate.flight.setPlane(plane)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h3>Fill flight details: </h3>
+    <h:form>
+        <h:outputLabel>Name </h:outputLabel>
+        <h:inputText value="#{flightToCreate.flight.name}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Departure </h:outputLabel>
+        <h:inputText value="#{flightToCreate.flight.departureTime}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Arrival </h:outputLabel>
+        <h:inputText value="#{flightToCreate.flight.arrivalTime}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Submit" action="#{flightToCreate.createFlight}" />
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="index" value="Main page"/>
+</h:body>
+</html>

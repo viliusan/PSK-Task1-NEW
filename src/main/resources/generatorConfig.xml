@@ -17,21 +17,21 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="task.lt.mybatis.dao" targetProject="MAVEN" />
 
 
-        <table schema="public" tableName="driver">
+        <table schema="public" tableName="pilot">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
-        <table schema="public" tableName="bus">
-            <generatedKey column="bus_id" identity="true" sqlStatement="JDBC" />
+        <table schema="public" tableName="plane">
+            <generatedKey column="plane_id" identity="true" sqlStatement="JDBC" />
         </table>
-        <table schema="public" tableName="trip">
+        <table schema="public" tableName="flight">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
         <table schema="public" tableName="ticket">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
-        <table schema="public" tableName="trip_log">
+        <table schema="public" tableName="flight_log">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
-        <table schema="public" tableName="driver_bus"/>
+        <table schema="public" tableName="pilot_plane"/>
     </context>
 </generatorConfiguration>

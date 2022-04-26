@@ -12,7 +12,7 @@
     <h2>Update ticket:</h2>
 
     <h:form id="updateForm">
-        <h:outputLabel>Trip Name: #{ticketToUpdate.ticket.trip.name}</h:outputLabel>
+        <h:outputLabel>Trip Name: #{ticketToUpdate.ticket.flight.name}</h:outputLabel>
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:outputLabel>Price</h:outputLabel>
         <h:inputText value="#{ticketToUpdate.ticket.price}" required="true" />

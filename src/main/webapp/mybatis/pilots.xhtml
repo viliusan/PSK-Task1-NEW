@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Pilots:</h2>
+    <h:form>
+        <h:dataTable value = "#{pilotsMyBatis.allPilots}" var = "pilot"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{pilot.pilotId}
+            </h:column>
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{pilot.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Surname</f:facet>
+                #{pilot.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Cell phone</f:facet>
+                #{pilot.cellPhone}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Delete pilot</f:facet>
+                <h:commandButton value="Delete" action="#{pilotsMyBatis.deletePilot(pilot.pilotId)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h3>Add new pilot: </h3>
+    <h:form>
+        <h:outputLabel>Name </h:outputLabel>
+        <h:inputText value="#{pilotsMyBatis.pilotToCreate.name}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Surname </h:outputLabel>
+        <h:inputText value="#{pilotsMyBatis.pilotToCreate.surname}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Cell phone </h:outputLabel>
+        <h:inputText value="#{pilotsMyBatis.pilotToCreate.cellPhone}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Add" action="#{pilotsMyBatis.createPilot}" />
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="/index" value="Main page"/>
+</h:body>
+</html>

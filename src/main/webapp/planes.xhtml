@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Planes:</h2>
+    <h:form>
+        <h:dataTable value = "#{planes.allPlanes}" var = "plane"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Plane Number</f:facet>
+                #{plane.planeNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Current fuel</f:facet>
+                #{plane.currentFuel}
+            </h:column>
+
+            <!-- <h:column>
+                <f:facet name = "header">Drivers</f:facet>
+                #{buses.getAllDriversAsString(plane)}
+             </h:column> -->
+
+            <h:column>
+                <f:facet name = "header">Delete plane</f:facet>
+                <h:commandButton value="Delete" action="#{planes.deletePlane(plane)}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assing pilot</f:facet>
+                <h:inputText binding="#{input}" />
+                <h:commandButton value="Assign" action="#{planes.assignPilotToPlane(input.value, plane.planeId)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h3>Add new plane: </h3>
+    <h:form>
+        <h:outputLabel>Plane number </h:outputLabel>
+        <h:inputText value="#{planes.planeToCreate.planeNumber}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Current fuel </h:outputLabel>
+        <h:inputText value="#{planes.planeToCreate.currentFuel}" required="true" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:commandButton value="Add" action="#{planes.createPlane}" />
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="index" value="Main page"/>
+</h:body>
+</html>

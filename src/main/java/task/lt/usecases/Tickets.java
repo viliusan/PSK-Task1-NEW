@@ -31,19 +31,19 @@ public class Tickets implements Serializable {
     private List<Ticket> allTickets;
 
     @Getter @Setter
-    private List<Ticket> allTicketsWithTrip;
+    private List<Ticket> allTicketsWithFlight;
 
     public void loadTickets() {
         this.allTickets = ticketsDAO.loadAll();
     }
 
-    public void loadTicketsWithTrip() {
-        this.allTicketsWithTrip = ticketsDAO.loadAllWithTrip();
+    public void loadTicketsWithFlight() {
+        this.allTicketsWithFlight = ticketsDAO.loadAllWithFlight();
     }
 
     @PostConstruct
     public void init(){
-        this.loadTicketsWithTrip();
+        this.loadTicketsWithFlight();
     }
 
     @Transactional

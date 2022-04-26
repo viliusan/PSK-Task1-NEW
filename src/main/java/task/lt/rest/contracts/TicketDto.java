@@ -15,5 +15,5 @@ public class TicketDto {
 
     private Boolean bought;
 
-    private String TripName;
+    private String FlightName;
 }

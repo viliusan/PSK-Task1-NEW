@@ -1,0 +1,58 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Flights:</h2>
+    <h:form>
+        <h:dataTable value = "#{flights.allFlightsWithPilotPlanes}" var = "flight"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{flight.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Departure</f:facet>
+                #{flight.departureTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Arrival</f:facet>
+                #{flight.arrivalTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Pilot name</f:facet>
+                #{flight.pilot.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Pilot surname</f:facet>
+                #{flight.pilot.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Plane number</f:facet>
+                #{flight.plane.planeNumber}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="flightToCreate" value="Add Flight"/>
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="index" value="Main page"/>
+</h:body>
+</html>

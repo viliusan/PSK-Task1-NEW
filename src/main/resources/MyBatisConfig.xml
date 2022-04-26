@@ -4,12 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="task.lt.mybatis.model.Driver" alias="Driver"/>
-        <typeAlias type="task.lt.mybatis.model.Bus" alias="Bus"/>
+        <typeAlias type="task.lt.mybatis.model.Pilot" alias="Pilot"/>
+        <typeAlias type="task.lt.mybatis.model.Plane" alias="Plane"/>
         <typeAlias type="task.lt.mybatis.model.Ticket" alias="Ticket"/>
-        <typeAlias type="task.lt.mybatis.model.Trip" alias="Trip"/>
-        <typeAlias type="task.lt.mybatis.model.TripLog" alias="TripLog"/>
-        <typeAlias type="task.lt.mybatis.model.DriverBus" alias="DriverBus"/>
+        <typeAlias type="task.lt.mybatis.model.Flight" alias="Flight"/>
+        <typeAlias type="task.lt.mybatis.model.FlightLog" alias="FlightLog"/>
+        <typeAlias type="task.lt.mybatis.model.PilotPlane" alias="PilotPlane"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -20,11 +20,11 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mybatis/xml/DriverMapper.xml"/>
-        <mapper resource="mybatis/xml/TripMapper.xml"/>
-        <mapper resource="mybatis/xml/BusMapper.xml"/>
+        <mapper resource="mybatis/xml/PilotMapper.xml"/>
+        <mapper resource="mybatis/xml/FlightMapper.xml"/>
+        <mapper resource="mybatis/xml/PlaneMapper.xml"/>
         <mapper resource="mybatis/xml/TicketMapper.xml"/>
-        <mapper resource="mybatis/xml/DriverBusMapper.xml"/>
-        <mapper resource="mybatis/xml/TripLogMapper.xml"/>
+        <mapper resource="mybatis/xml/PilotPlaneMapper.xml"/>
+        <mapper resource="mybatis/xml/FlightLogMapper.xml"/>
     </mappers>
 </configuration>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="#{request.contextPath}/css/table.css" />
+</h:head>
+
+<h:body>
+    <h2>Planes:</h2>
+    <h:form>
+        <h:dataTable value = "#{planesMyBatis.allPlanes}" var = "plane"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Plane Number</f:facet>
+                #{plane.planeNumber}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Current fuel</f:facet>
+                #{plane.currentFuel}
+            </h:column>
+
+            <!-- <h:column>
+                 <f:facet name = "header">Drivers</f:facet>
+                 #{buses.getAllDriversAsString(bus)}
+             </h:column> -->
+
+            <h:column>
+                <f:facet name = "header">Delete plane</f:facet>
+                <h:commandButton value="Delete" action="#{planesMyBatis.deletePlane(plane.planeId)}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assing pilot</f:facet>
+                <h:inputText binding="#{input}" />
+                <h:commandButton value="Assign" action="#{planesMyBatis.assignPilotToPlane(plane.planeId, input.value)}" />
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">See assigned pilots</f:facet>
+                <h:commandButton value="See" action="#{planesMyBatis.loadPilotsById(plane.planeId)}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:form>
+        <h2>Assigned pilots for plane:</h2>
+        <h:dataTable value = "#{planesMyBatis.currentPlanePilots}" var = "pilot"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">ID</f:facet>
+                #{pilot.pilotId}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{pilot.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Surname</f:facet>
+                #{pilot.surname}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">CellPhone</f:facet>
+                #{pilot.cellPhone}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <h:outputText value="&lt;br/&gt;" escape="false" />
+    <h:link outcome="/index" value="Main page"/>
+</h:body>
+</html>

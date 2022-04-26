@@ -18,8 +18,8 @@ public class TicketsMyBatis {
     @Getter @Setter
     private List<Ticket> allTickets;
 
-    public void loadTrips() {
-        this.allTickets = ticketMapper.selectAllWithTrip();
+    public void loadFlights() {
+        this.allTickets = ticketMapper.selectAllWithFlight();
     }
 
     /*public String getTripNameWithId(Integer tripId){
@@ -29,6 +29,6 @@ public class TicketsMyBatis {
 
     @PostConstruct
     public void init() {
-        this.loadTrips();
+        this.loadFlights();
     }
 }

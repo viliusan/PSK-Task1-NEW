@@ -11,13 +11,13 @@
 <h:body>
     <h2>Ticket:</h2>
     <h:form>
-        <h:dataTable value = "#{tickets.allTicketsWithTrip}" var = "ticket"
+        <h:dataTable value = "#{tickets.allTicketsWithFlight}" var = "ticket"
                      styleClass = "mainTable"
                      headerClass = "tableHeader"
                      rowClasses = "tableOddRow,tableEvenRow">
             <h:column>
                 <f:facet name = "header">Trip name</f:facet>
-                #{ticket.trip.name}
+                #{ticket.flight.name}
             </h:column>
 
             <h:column>
@@ -51,29 +51,29 @@
 
     <h2>Add ticket:</h2>
     <h:form>
-        <h3>Assign trip for ticket</h3>
-        <h:dataTable value = "#{trips.allTripsWithDriverBus}" var = "trip"
+        <h3>Assign flight for ticket</h3>
+        <h:dataTable value = "#{flights.allFlightsWithPilotPlanes}" var = "flight"
                      styleClass = "mainTable"
                      headerClass = "tableHeader"
                      rowClasses = "tableOddRow,tableEvenRow">
             <h:column>
                 <f:facet name = "header">Name</f:facet>
-                #{trip.name}
+                #{flight.name}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Departure</f:facet>
-                #{trip.departureTime}
+                #{flight.departureTime}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Arrival</f:facet>
-                #{trip.arrivalTime}
+                #{flight.arrivalTime}
             </h:column>
 
             <h:column>
                 <f:facet name = "header">Assign</f:facet>
-                <h:commandButton value="Assign" action="#{tickets.ticketToCreate.setTrip(trip)}" />
+                <h:commandButton value="Assign" action="#{tickets.ticketToCreate.setTrip(flight)}" />
             </h:column>
         </h:dataTable>
 

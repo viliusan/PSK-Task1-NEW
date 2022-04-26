@@ -1,7 +1,7 @@
 package task.lt.usecases;
 
 import task.lt.interceptors.LoggedInvocation;
-import task.lt.services.DriverCardNumberGenerator;
+import task.lt.services.PilotCardNumberGenerator;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,7 +16,7 @@ import java.util.concurrent.Future;
 @Named
 public class GenerateCardNumber implements Serializable {
     @Inject
-    DriverCardNumberGenerator driverCardNumberGenerator;
+    PilotCardNumberGenerator pilotCardNumberGenerator;
 
     private Future<Integer> driverCardNumberGenerationTask = null;
 
@@ -24,8 +24,8 @@ public class GenerateCardNumber implements Serializable {
     public String generateDriverCardNumber() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        driverCardNumberGenerationTask = driverCardNumberGenerator.generateDriverCardNumber();
-        return  "driverToUpdate?faces-redirect=true&driverId=" + requestParameters.get("driverId");
+        driverCardNumberGenerationTask = pilotCardNumberGenerator.generatePilotCardNumber();
+        return  "pilotToUpdate?faces-redirect=true&driverId=" + requestParameters.get("pilotId");
     }
 
     public boolean isCardNumberGenerationRunning() {

@@ -16,8 +16,8 @@ public class TicketsDAO {
         return em.createNamedQuery("Ticket.findAll", Ticket.class).getResultList();
     }
 
-    public List<Ticket> loadAllWithTrip() {
-        return em.createNamedQuery("Ticket.findAllWithTrips", Ticket.class).getResultList();
+    public List<Ticket> loadAllWithFlight() {
+        return em.createNamedQuery("Ticket.findAllWithFlights", Ticket.class).getResultList();
     }
 
     public void setEm(EntityManager em) {

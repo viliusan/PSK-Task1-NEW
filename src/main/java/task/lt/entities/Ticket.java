@@ -10,8 +10,8 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Ticket.findAll", query = "select tck from Ticket as tck"),
-        @NamedQuery(name = "Ticket.findAllWithTrips",
-                query = "select tck from Ticket tck left join fetch tck.trip")
+        @NamedQuery(name = "Ticket.findAllWithFlights",
+                query = "select tck from Ticket tck left join fetch tck.flight")
 })
 @Table(name = "ticket", schema = "public")
 @Getter @Setter
@@ -21,8 +21,8 @@ public class Ticket {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "trip_id")
-    private Trip trip;
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
 
     @Column(name = "seat")
     @NotNull
