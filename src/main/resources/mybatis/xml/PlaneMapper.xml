@@ -10,6 +10,19 @@
     <id column="PLANE_ID" jdbcType="INTEGER" property="planeId" />
     <result column="CURRENT_FUEL" jdbcType="INTEGER" property="currentFuel" />
     <result column="PLANE_NUMBER" jdbcType="VARCHAR" property="planeNumber" />
+
+    <collection property="flights" ofType="task.lt.mybatis.model.Flight">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="arrival_time" jdbcType="VARCHAR" property="arrivalTime" />
+      <result column="departure_time" jdbcType="VARCHAR" property="departureTime" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="plane_id" jdbcType="INTEGER" property="planeId" />
+      <result column="pilot_id" jdbcType="INTEGER" property="pilotId" />
+    </collection>
+
+    <collection property="pilots" javaType="ArrayList"
+                ofType="task.lt.mybatis.model.Pilot" column="plane_id"
+                select="selectPilotsForPlane"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -63,14 +76,14 @@
   <select id="selectAllWithFlights" resultMap="BaseResultMap">
     select *
     from plane plane
-    left join flight flt ON plane.plane_id = flt.plane_id
+            left join flight flt ON plane.plane_id = flt.plane_id
   </select>
 
   <select id="selectPilotsForPlane" resultType="task.lt.mybatis.model.Pilot">
     SELECT pil.pilot_id pilotId, pil.name, pil.surname, pil.cell_phone cellPhone
     FROM pilot pil
-    LEFT JOIN pilot_plane db ON pil.pilot_id = db.pilot_id
-    WHERE db.plane_id = #{plane_id,jdbcType=INTEGER}
+            LEFT JOIN pilot_plane pp ON pil.pilot_id = pp.pilot_id
+    WHERE pp.plane_id = #{plane_id,jdbcType=INTEGER}
   </select>
 
 

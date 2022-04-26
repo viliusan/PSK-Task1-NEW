@@ -14,6 +14,13 @@
     <result column="TICKET_NUMBER" jdbcType="INTEGER" property="ticketNumber" />
     <result column="OPT_LOCK_VERSION" jdbcType="INTEGER" property="optLockVersion" />
     <result column="FLIGHT_ID" jdbcType="INTEGER" property="flightId" />
+
+    <association property="assignedFlight" javaType="task.lt.mybatis.model.Flight">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="arrival_time" jdbcType="VARCHAR" property="arrivalTime" />
+      <result column="departure_time" jdbcType="VARCHAR" property="departureTime" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+    </association>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--

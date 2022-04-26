@@ -69,7 +69,7 @@ public class PlanesMyBatis implements Serializable {
 
     public void loadPilotsById(Integer planeId){
         for (Plane plane:allPlanes) {
-            if (plane.getPlaneId().equals(planeId)){
+            if (plane.getPlaneId().equals(planeId)) {
                 this.currentPlanePilots = plane.getPilots();
             }
         }

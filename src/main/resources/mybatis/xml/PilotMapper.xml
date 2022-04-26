@@ -12,6 +12,19 @@
     <result column="CELL_PHONE" jdbcType="VARCHAR" property="cellPhone" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="SURNAME" jdbcType="VARCHAR" property="surname" />
+
+    <collection property="flights" ofType="task.lt.mybatis.model.Flight">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="arrival_time" jdbcType="VARCHAR" property="arrivalTime" />
+      <result column="departure_time" jdbcType="VARCHAR" property="departureTime" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="pilot_id" jdbcType="INTEGER" property="pilotId" />
+      <result column="plane_id" jdbcType="INTEGER" property="planeId" />
+    </collection>
+
+    <collection property="planes" javaType="ArrayList"
+                ofType="task.lt.mybatis.model.Plane" column="pilot_id"
+                select="selectPlanesForPilot"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -76,6 +89,6 @@
   <select id="selectAllWithFlights" resultMap="BaseResultMap">
     select *
     from pilot pil
-    left join flight flt ON flt.pilot_id = pil.pilot_id
+            left join flight flt ON flt.pilot_id = pil.pilot_id
   </select>
 </mapper>

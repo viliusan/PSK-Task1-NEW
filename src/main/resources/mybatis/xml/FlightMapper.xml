@@ -13,6 +13,27 @@
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="PILOT_ID" jdbcType="INTEGER" property="pilotId" />
     <result column="PLANE_ID" jdbcType="INTEGER" property="planeId" />
+
+    <association property="assignedPilot" javaType="task.lt.mybatis.model.Pilot">
+      <id column="pilot_id" jdbcType="INTEGER" property="pilotId" />
+      <result column="cell_phone" jdbcType="VARCHAR" property="cellPhone" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="surname" jdbcType="VARCHAR" property="surname" />
+    </association>
+
+    <association property="assignedPlane" javaType="task.lt.mybatis.model.Plane">
+      <id column="plane_id" jdbcType="INTEGER" property="planeId" />
+      <result column="current_fuel" jdbcType="INTEGER" property="currentFuel" />
+      <result column="plane_number" jdbcType="VARCHAR" property="planeNumber" />
+    </association>
+
+    <collection property="tickets" ofType="task.lt.mybatis.model.Ticket">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="is_bought" jdbcType="BIT" property="isBought" />
+      <result column="price" jdbcType="DOUBLE" property="price" />
+      <result column="seat" jdbcType="INTEGER" property="seat" />
+      <result column="flight_id" jdbcType="INTEGER" property="flightId" />
+    </collection>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--

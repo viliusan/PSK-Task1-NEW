@@ -79,6 +79,7 @@ public class Planes implements Serializable {
         Plane plane = this.planesDAO.findOne(planeId);
         plane.addPilot(pilot);
         planesDAO.persist(plane);
+        System.out.println(plane.getPilots().size());
         return "planes?faces-redirect=true";
     }
 
