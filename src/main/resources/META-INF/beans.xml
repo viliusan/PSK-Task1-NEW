@@ -11,6 +11,6 @@
         <class>task.lt.decorators.AdvancedTicketNumberGenerator</class>
     </decorators>
     <alternatives>
-        <class>task.lt.services.PlateNumberCheckerCheckerEU</class>
+        <class>task.lt.services.PlaneNumberCheckerService</class>
     </alternatives>
 </beans>

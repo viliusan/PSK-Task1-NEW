@@ -7,7 +7,7 @@ import task.lt.entities.Pilot;
 import task.lt.interceptors.LoggedInvocation;
 import task.lt.persistence.PlanesDAO;
 import task.lt.persistence.PilotsDAO;
-import task.lt.services.PlateNumberChecker;
+import task.lt.services.PlaneNumberCheckerService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -27,7 +27,7 @@ public class Planes implements Serializable {
     private PilotsDAO pilotsDAO;
 
     @Inject
-    private PlateNumberChecker plateNumberChecker;
+    private PlaneNumberCheckerService planeNumberChecker;
 
     @Getter
     @Setter
@@ -62,7 +62,7 @@ public class Planes implements Serializable {
     @Transactional
     @LoggedInvocation
     public String createPlane(){
-        if (!plateNumberChecker.checkPlateNumber(planeToCreate.getPlaneNumber())){
+        if (!planeNumberChecker.checkPlaneNumber(planeToCreate.getPlaneNumber())){
             return "Plate number doesn't pass validation";
         }
         this.planesDAO.persist(planeToCreate);
