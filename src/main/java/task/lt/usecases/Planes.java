@@ -63,7 +63,7 @@ public class Planes implements Serializable {
     @LoggedInvocation
     public String createPlane(){
         if (!planeNumberChecker.checkPlaneNumber(planeToCreate.getPlaneNumber())){
-            return "Plate number doesn't pass validation";
+            return "Plane number doesn't pass validation";
         }
         this.planesDAO.persist(planeToCreate);
         return "planes?faces-redirect=true";
