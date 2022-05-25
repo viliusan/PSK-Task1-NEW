@@ -15,13 +15,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @ApplicationScoped
-@Path("/tickets")
+@Path("tickets")
 public class TicketController {
     @Inject
     @Setter @Getter
     private TicketsDAO ticketsDAO;
 
-    @Path("/{id}")
+    @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTicketById(@PathParam("id") final Integer id) {
@@ -30,17 +30,13 @@ public class TicketController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        TicketDto ticketToRet = new TicketDto();
-        ticketToRet.setPrice(ticket.getPrice());
-        ticketToRet.setSeat(ticket.getSeat());
-        ticketToRet.setFlightName(ticket.getFlight().getName());
-
-        return Response.ok(ticketToRet).build();
+        return Response.ok(ticket).build();
     }
 
-    @Path("/{id}")
+    @Path("{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response update(@PathParam("id") final Integer ticketId, @Valid TicketDto ticket) {
         Ticket ticketToUpdate = ticketsDAO.findOne(ticketId);
@@ -51,7 +47,7 @@ public class TicketController {
         ticketToUpdate.setSeat(ticket.getSeat());
         ticketToUpdate.setPrice(ticket.getPrice());
         ticketsDAO.update(ticketToUpdate);
-        return Response.ok().build();
+        return Response.ok(ticketToUpdate).build();
     }
 
     /*
@@ -61,7 +57,6 @@ public class TicketController {
         "bought":true
     }
      */
-    @Path("/")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
