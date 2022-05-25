@@ -18,26 +18,26 @@ public class GenerateCardNumber implements Serializable {
     @Inject
     PilotCardNumberGenerator pilotCardNumberGenerator;
 
-    private Future<Integer> driverCardNumberGenerationTask = null;
+    private Future<Integer> pilotCardNumberGenerationTask = null;
 
     @LoggedInvocation
-    public String generateDriverCardNumber() {
+    public String generatePilotCardNumber() {
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        driverCardNumberGenerationTask = pilotCardNumberGenerator.generatePilotCardNumber();
-        return  "pilotToUpdate?faces-redirect=true&driverId=" + requestParameters.get("pilotId");
+        pilotCardNumberGenerationTask = pilotCardNumberGenerator.generatePilotCardNumber();
+        return  "pilotToUpdate?faces-redirect=true&pilotId=" + requestParameters.get("pilotId");
     }
 
     public boolean isCardNumberGenerationRunning() {
-        return driverCardNumberGenerationTask != null && !driverCardNumberGenerationTask.isDone();
+        return pilotCardNumberGenerationTask != null && !pilotCardNumberGenerationTask.isDone();
     }
 
     public String getCardNumberGenerationStatus() throws ExecutionException, InterruptedException {
-        if (driverCardNumberGenerationTask == null) {
+        if (pilotCardNumberGenerationTask == null) {
             return null;
         } else if (isCardNumberGenerationRunning()) {
             return "Card number generation in progress. Refresh to see if number exists ";
         }
-        return "Suggested card number: " + driverCardNumberGenerationTask.get() + " ";
+        return "Suggested card number: " + pilotCardNumberGenerationTask.get() + " ";
     }
 }

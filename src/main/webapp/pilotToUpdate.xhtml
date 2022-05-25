@@ -29,12 +29,13 @@
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h3>Suggested card number:</h3>
         <h:outputText value="#{generateCardNumber.cardNumberGenerationStatus}" />
-        <h:commandButton value="Generate card number?" disabled="#{generateCardNumber.cardNumberGenerationRunning}" action="#{generateCardNumber.generateDriverCardNumber()}">
+        <h:commandButton value="Generate card number?" disabled="#{generateCardNumber.cardNumberGenerationRunning}" action="#{generateCardNumber.generatePilotCardNumber()}">
             <f:param name="pilotId" value="#{pilotToUpdate.pilot.pilotId}" />
         </h:commandButton>
         <h:outputText value="&lt;br/&gt;" escape="false" />
         <h:outputText value="&lt;br/&gt;" escape="false" />
-        <h:commandButton value="Refresh page" disabled="#{!generateCardNumber.cardNumberGenerationRunning}" outcome="pilotToUpdate?faces-redirect=true"/>
+        <h:commandButton value="Refresh page" disabled="#{!generateCardNumber.cardNumberGenerationRunning}" outcome="pilotToUpdate?pilotId=#{pilot.pilotId}"/>
+            <f:param name="pilotId" value="#{pilotToUpdate.pilot.pilotId}" />
     </h:form>
 </h:body>
 </html>

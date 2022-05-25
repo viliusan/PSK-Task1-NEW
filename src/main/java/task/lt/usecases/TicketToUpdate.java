@@ -35,19 +35,6 @@ public class TicketToUpdate implements Serializable {
         this.ticket = ticketsDAO.findOne(ticketId);
     }
 
-    /*@Transactional
-    public void updateTicketWithoutAsking() {
-        try {
-            ticketsDAO.update(this.ticket);
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("ticket.xhtml?faces-redirect=true" + "&info=success");
-        } catch (OptimisticLockException e) {
-            updateTicketAfterLock();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
     @Transactional
     public void updateTicket() {
         try {
